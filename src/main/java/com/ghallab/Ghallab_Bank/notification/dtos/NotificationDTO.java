@@ -1,5 +1,7 @@
 package com.ghallab.Ghallab_Bank.notification.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ghallab.Ghallab_Bank.auth_users.entity.User;
 import com.ghallab.Ghallab_Bank.enums.NotificationType;
 import jakarta.persistence.*;
@@ -13,11 +15,12 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 
-@Builder
 @Data
-@AllArgsConstructor
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
-
+@AllArgsConstructor
 public class NotificationDTO {
 
     private Long id ;
@@ -30,7 +33,8 @@ public class NotificationDTO {
 
 
 
-    private NotificationType notificationType;
+    private NotificationType type;
+    private LocalDateTime createdAt;
 
 
     //For values/variables to be passed into email templates

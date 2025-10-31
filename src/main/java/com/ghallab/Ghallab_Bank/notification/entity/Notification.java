@@ -26,9 +26,10 @@ public class Notification {
 
     private String subject ;
     private  String recipient ;
+    private String body ;
 
     @Enumerated(EnumType.STRING)
-    private NotificationType notificationType;
+    private NotificationType type;
 
     @ManyToOne
     @JoinColumn(name ="user_id")
