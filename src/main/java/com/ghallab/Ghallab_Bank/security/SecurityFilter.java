@@ -4,6 +4,7 @@ package com.ghallab.Ghallab_Bank.security;
 import com.ghallab.Ghallab_Bank.exceptions.CustomAccessDenialHandler;
 import com.ghallab.Ghallab_Bank.exceptions.CustomAuthenticationEntryPoint;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,36 +23,42 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SecurityFilter {
-    private  final AuthFilter authFilter ;
 
-    private final CustomAccessDenialHandler customAccessDenialHandler ;
-
-    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint ;
+    private final AuthFilter authFilter;
+    private final CustomAccessDenialHandler customAccessDenialHandler;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .exceptionHandling(
-                        ex ->ex.accessDeniedHandler(customAccessDenialHandler)
-                                .authenticationEntryPoint(customAuthenticationEntryPoint))
-                .authorizeHttpRequests(req ->req.requestMatchers("/api/auth/**")
-                        .permitAll().anyRequest().authenticated())
-                        .sessionManagement(mag->mag.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(authFilter , UsernamePasswordAuthenticationFilter.class);
+                .exceptionHandling(ex ->
+                        ex.accessDeniedHandler(customAccessDenialHandler).authenticationEntryPoint(customAuthenticationEntryPoint))
+                .authorizeHttpRequests(req -> req.requestMatchers("/api/auth/**").permitAll()
+                        .anyRequest().authenticated())
+                .sessionManagement(mag -> mag.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 
-        return httpSecurity.build() ;
+        return httpSecurity.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager() ;
-
+        return authenticationConfiguration.getAuthenticationManager();
     }
+
 }
+
+
+
+
+
+

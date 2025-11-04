@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Account Details - Ghallab Bank</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Poppins', Arial, sans-serif; 
+            background: #f8fbf8;
+            margin: 0; 
+            padding: 0; 
+            color: #333;
+        }
+        
+        .container { 
+            max-width: 600px; 
+            margin: 30px auto; 
+            background: #ffffff; 
+            border-radius: 12px;
+            padding: 30px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #2e7d32;
+            color: white;
+            padding: 25px 30px;
+            margin: -30px -30px 25px -30px;
+            border-radius: 12px 12px 0 0;
+            text-align: center;
+        }
+        
+        .bank-logo {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        h2 { 
+            color: #ffffff; 
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .content {
+            padding: 0 10px;
+            text-align: center;
+        }
+        
+        p { 
+            color: #444; 
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .success-icon {
+            text-align: center;
+            font-size: 50px;
+            margin: 15px 0;
+        }
+        
+        .account-details {
+            background: #f1f8e9;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .detail-value {
+            font-weight: 600;
+            color: #2e7d32;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #2e7d32;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 15px 0;
+        }
+        
+        .footer { 
+            margin-top: 30px; 
+            font-size: 12px; 
+            color: #777; 
+            text-align: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="bank-logo">Ghallab Bank</div>
+        <h2>Account Created Successfully</h2>
+    </div>
+
+    <div class="content">
+        <div class="success-icon">✅</div>
+
+        <p>Hello <span th:text="${name}">Customer</span>,</p>
+        <p>Your <span th:text="${accountType}">account</span> is ready to use.</p>
+
+        <div class="account-details">
+            <div class="detail-item">
+                <span class="detail-label">Account Number:</span>
+                <span class="detail-value" th:text="${accountNumber}"></span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Account Type:</span>
+                <span class="detail-value" th:text="${accountType}"></span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Currency:</span>
+                <span class="detail-value" th:text="${currency}"></span>
+            </div>
+        </div>
+
+        <p>You can now log in and start banking with us.</p>
+
+        <a href="#" class="cta-button">Login to Account</a>
+    </div>
+
+    <div class="footer">
+        © 2025 Ghallab Bank | Secure Banking Made Simple
+    </div>
+</div>
+</body>
+</html>

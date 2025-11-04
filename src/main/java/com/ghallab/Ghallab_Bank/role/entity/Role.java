@@ -11,10 +11,13 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Table(name = "roles")
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id ;
+    private Long id ;
 
     @Column(unique = true)
     @NotBlank(message = "Role name is required !!")

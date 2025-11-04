@@ -20,7 +20,7 @@ public class GhallabBankApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GhallabBankApplication.class, args);
 	}
-	@Bean
+	/*@Bean
 	CommandLineRunner runner(){
 		return args->{
 			NotificationDTO notificationDTO = NotificationDTO.builder()
@@ -31,5 +31,5 @@ public class GhallabBankApplication {
 					.build();
 			notificationService.sendEmail(notificationDTO, new User());
 		};
-	}
+	}*/
 }

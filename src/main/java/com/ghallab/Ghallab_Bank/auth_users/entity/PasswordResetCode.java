@@ -2,6 +2,7 @@ package com.ghallab.Ghallab_Bank.auth_users.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "password_reset_code")
+@Builder
 public class PasswordResetCode {
 
 

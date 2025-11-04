@@ -1,7 +1,9 @@
 package com.ghallab.Ghallab_Bank.auth_users.dtos;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
+@Data
 public class UpdatePasswordRequest {
 
     @NotBlank(message = "Old Password is required")

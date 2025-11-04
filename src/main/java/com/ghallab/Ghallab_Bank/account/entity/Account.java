@@ -45,7 +45,8 @@ public class Account {
     private Currency currency ;
 
     @Enumerated(EnumType.STRING)
-    private AccountStatus accountStatus;
+    private AccountStatus status;
+
 
     @OneToMany(mappedBy = "account" , cascade = CascadeType.ALL , orphanRemoval = true , fetch =FetchType.LAZY)
     private List<Transaction> transactions = new ArrayList<>() ;

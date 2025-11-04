@@ -26,7 +26,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
 
-    private  String name ;
+    private  String firstName ;
 
     private  String lastname ;
 
@@ -40,7 +40,7 @@ public class User {
 
     private String password ;
 
-    private String profilePictureURl ;
+    private String profilePictureUrl ;
 
     private boolean active = true;
 
@@ -56,6 +56,6 @@ public class User {
     private List <Account> accounts ;
 
     private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime updatedeAt ;
+    private LocalDateTime updatedAt ;
 
 }
