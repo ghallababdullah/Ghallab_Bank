@@ -1,17 +1,14 @@
 package com.ghallab.Ghallab_Bank.account.entity;
-import com.ghallab.Ghallab_Bank.transaction.entity.Transaction;
 import com.ghallab.Ghallab_Bank.auth_users.entity.User;
 import com.ghallab.Ghallab_Bank.enums.AccountStatus;
 import com.ghallab.Ghallab_Bank.enums.AccountType;
 import com.ghallab.Ghallab_Bank.enums.Currency;
+import com.ghallab.Ghallab_Bank.transaction.entity.Transaction;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import org.hibernate.engine.internal.Cascade;
-import org.springframework.beans.propertyeditors.CurrencyEditor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
