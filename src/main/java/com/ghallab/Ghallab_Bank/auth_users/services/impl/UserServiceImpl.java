@@ -5,6 +5,7 @@ import com.ghallab.Ghallab_Bank.auth_users.entity.User;
 import com.ghallab.Ghallab_Bank.auth_users.services.UserService;
 //import com.ghallab.Ghallab_Bank.aws.S3Service;
 import com.ghallab.Ghallab_Bank.auth_users.repo.UserRepo;
+import com.ghallab.Ghallab_Bank.aws.S3Service;
 import com.ghallab.Ghallab_Bank.exceptions.BadRequestException;
 import com.ghallab.Ghallab_Bank.exceptions.NotFoundException;
 import com.ghallab.Ghallab_Bank.notification.dtos.NotificationDTO;
@@ -41,9 +42,10 @@ public class UserServiceImpl  implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
 
-    private final String uploadDir = "uploads/profile-pictures/"  ;
+    //private final String uploadDir = "uploads/profile-pictures/"  ;
+    private final String uploadDir = "C:/Users/User/Desktop/Ghallab_Dev/Ghallab_Bank/frontend/bank-react/public/profile-picture/"  ;
 
-   // private final S3Service s3Service;
+   private final S3Service s3Service;
 
     @Override
     public User getCurrentLoggedInUser() {
@@ -142,7 +144,11 @@ public class UserServiceImpl  implements UserService {
             Path filePath = uploadPath.resolve(newFilename) ;
 
             Files.copy(file.getInputStream() , filePath) ;
-            String fileUrl = uploadDir + newFilename ;
+            //for backend
+            //String fileUrl = uploadDir + newFilename ;
+            //for frontend
+            String fileUrl = "profile-picture/" + newFilename ;
+
             user.setProfilePictureUrl(fileUrl);
             userRepo.save(user) ;
 
@@ -161,7 +167,32 @@ public class UserServiceImpl  implements UserService {
     }
 
     @Override
-    public Response<?> uploadProfilePictureToS3(MultipartFile file) {
-        return null;
+    public Response<?> uploadProfilePictureToS3(MultipartFile file){
+
+        log.info("Inside uploadProfilePictureToS3()");
+        User user = getCurrentLoggedInUser();
+
+        try {
+
+            if(user.getProfilePictureUrl() != null && !user.getProfilePictureUrl().isEmpty()){
+                s3Service.deleteFile(user.getProfilePictureUrl());
+            }
+            String s3Url = s3Service.uploadFile(file, "profile-pictures");
+
+            log.info("profile url is: {}", s3Url );
+
+            user.setProfilePictureUrl(s3Url);
+            userRepo.save(user);
+
+            return Response.builder()
+                    .statusCode(HttpStatus.OK.value())
+                    .message("Profile picture uploaded successfully.")
+                    .data(s3Url)
+                    .build();
+
+        }catch (IOException e){
+
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }
