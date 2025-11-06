@@ -51,6 +51,6 @@ public class UserDTO {
     private List <AccountDTO> accounts ;
 
     private LocalDateTime createdAt;
-    private LocalDateTime updatedeAt ;
+    private LocalDateTime updatedAt ;
 
 }
