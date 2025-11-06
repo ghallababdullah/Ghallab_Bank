@@ -1,6 +1,5 @@
 # Ghallab_Bank
-English Version
-📖 Overview
+
 Ghallab Bank is a full-stack banking application built with Spring Boot 3 backend and React frontend. The application provides secure banking operations with role-based access control, file storage, and comprehensive transaction management.
 
 ## 🛠️ Tech Stack
